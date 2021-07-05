@@ -98,15 +98,15 @@ def main():
     else:
         N_gpu = 1
     #init teacher and student
-    student = init_student({'0': 24, '1': 24, '2': 24})
+    student = init_student({'0'})
     teacher = init_teacher()
     if args.resume:
         missing, unexpected = student.load_state_dict(torch.load(args.resume), strict=False)
-    # student.detect.stride = teacher.model[-1].stride.detach()
-    # student.detect.nl = teacher.model[-1].nl
-    # student.detect.grid = teacher.model[-1].grid.copy()
-    # student.detect.anchors = teacher.model[-1].anchors.detach()
-    # student.detect.anchor_grid = teacher.model[-1].anchor_grid.detach()
+    student.detect.stride = teacher.model[-1].stride.detach()
+    student.detect.nl = teacher.model[-1].nl
+    student.detect.grid = teacher.model[-1].grid.copy()
+    student.detect.anchors = teacher.model[-1].anchors.detach()
+    student.detect.anchor_grid = teacher.model[-1].anchor_grid.detach()
 
     # Image sizes
     gs = int(max(student.stride))  # grid size (max stride)

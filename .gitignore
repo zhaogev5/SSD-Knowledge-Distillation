@@ -4,3 +4,4 @@ inference
 runs
 checkpoints
 goods
+yolov5_l.pt
